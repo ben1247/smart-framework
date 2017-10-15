@@ -22,6 +22,7 @@ public final class ClassHelper {
     static {
         String basePackage = ConfigHelper.getAppBasePackage();
         CLASS_SET = ClassUtil.getClassSet(basePackage);
+        CLASS_SET.addAll(ClassUtil.getClassSetInLibs("smart-framework"));
     }
 
     /**

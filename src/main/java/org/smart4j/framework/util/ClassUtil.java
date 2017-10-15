@@ -50,6 +50,7 @@ public final class ClassUtil {
         try {
             cls = Class.forName(className,isInitialized,getClassLoader());
         } catch (ClassNotFoundException e) {
+            e.printStackTrace();
             LOGGER.error("load class failure",e);
             throw new RuntimeException(e);
         }
@@ -92,10 +93,51 @@ public final class ClassUtil {
                 }
             }
         } catch (IOException e) {
+            e.printStackTrace();
             LOGGER.error("get class set failure",e);
             throw new RuntimeException(e);
         }
 
+        return classSet;
+    }
+
+
+    public static Set<Class<?>> getClassSetInLibs(String libName){
+        Set<Class<?>> classSet = new HashSet<>();
+        try {
+            String libPath = getClassLoader().getResource("/").getPath().split("/classes/")[0]+"/lib/";
+            File file = null;
+            File [] libFiles = new File(libPath).listFiles();
+            if(ArrayUtil.isEmpty(libFiles)){
+                return classSet;
+            }
+            for(File f : libFiles){
+                if(f.getName().contains(libName)){
+                    file = f;
+                    break;
+                }
+            }
+            if(file == null){
+                return classSet;
+            }
+
+            JarFile jarFile = new JarFile(file);
+            Enumeration<JarEntry> jarEntries = jarFile.entries();
+            while (jarEntries.hasMoreElements()){
+                JarEntry jarEntry = jarEntries.nextElement();
+                String jarEntryName = jarEntry.getName();
+                if(jarEntryName.endsWith(".class")){
+                    String className = jarEntryName.substring(0,jarEntryName.lastIndexOf(".")).replaceAll("/",".");
+                    System.out.println("jarEntryName: " + jarEntryName + "   className:" + className);
+                    doAddClass(classSet,className);
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            LOGGER.error("get class set in libs failure",e);
+            throw new RuntimeException(e);
+        }
         return classSet;
     }
 
@@ -138,5 +180,13 @@ public final class ClassUtil {
     private static void doAddClass(Set<Class<?>> classSet , String className){
         Class<?> cls = loadClass(className,false);
         classSet.add(cls);
+    }
+
+
+    public static void main(String [] args){
+        String path = "/Users/yuezhang/work/workspaces/intellij_workspaces/build-my-web/smart-client/target/smart-client-1.0.0/WEB-INF/classes/";
+
+        String [] array = path.split("/classes/");
+        System.out.println(array[0]+"/lib/");
     }
 }
