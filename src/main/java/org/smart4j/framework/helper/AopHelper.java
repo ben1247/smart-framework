@@ -20,11 +20,12 @@ public final class AopHelper {
 
     static {
         try {
-            Map<Class<?>,Set<Class<?>>> proxyMap = createProxyMap();
-            Map<Class<?>,List<Proxy>> targetMap = createTargetMap(proxyMap);
+            Map<Class<?>,Set<Class<?>>> proxyMap = createProxyMap(); // key: 代理类  value：目标类集合
+            Map<Class<?>,List<Proxy>> targetMap = createTargetMap(proxyMap); // key: 目标类  value：代理类集合
             for(Map.Entry<Class<?>, List<Proxy>> targetEntry : targetMap.entrySet()){
                 Class<?> targetClass = targetEntry.getKey();
                 List<Proxy> proxyList = targetEntry.getValue();
+                // 生成代理对象
                 Object proxy = ProxyManager.createProxy(targetClass,proxyList);
                 BeanHelper.setBean(targetClass,proxy);
             }
@@ -37,7 +38,7 @@ public final class AopHelper {
      * 获取代理类和目标类之间的映射关系
      * 注：代理类需要需要扩展AspectProxy抽象类，还需要带有Aspect注解，
      * 只有满足这2个条件才能建立代理类和目标类集合之间的映射关系。
-     * @return
+     * @return Map集合，key：代理类  value：目标类集合
      * @throws Exception
      */
     private static Map<Class<?>,Set<Class<?>>> createProxyMap() throws Exception{
@@ -55,8 +56,9 @@ public final class AopHelper {
 
     /**
      * 获取Aspect注解中设置的注解类
+     * 例如：根据Controller.class 来获取 带有@Controller的类有哪些
      * @param aspect
-     * @return
+     * @return 目标类集合（例子里所有controller类）
      * @throws Exception
      */
     private static Set<Class<?>> createTargetClassSet(Aspect aspect) throws Exception{
