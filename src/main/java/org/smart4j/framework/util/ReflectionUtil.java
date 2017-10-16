@@ -44,6 +44,7 @@ public final class ReflectionUtil {
             method.setAccessible(true);
             result = method.invoke(obj,args);
         } catch (Exception e) {
+            e.printStackTrace();
             LOGGER.error("invoke method failure",e);
             throw new RuntimeException(e);
         }

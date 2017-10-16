@@ -26,6 +26,7 @@ public class ControllerAspect extends AspectProxy{
         LOGGER.info("--------------- begin ---------------");
         LOGGER.info(String.format("class: %s" , cls.getName()));
         LOGGER.info(String.format("method: %s", method.getName()));
+
         begin = System.currentTimeMillis();
     }
 

@@ -50,7 +50,6 @@ public final class ClassUtil {
         try {
             cls = Class.forName(className,isInitialized,getClassLoader());
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
             LOGGER.error("load class failure",e);
             throw new RuntimeException(e);
         }
@@ -93,7 +92,6 @@ public final class ClassUtil {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
             LOGGER.error("get class set failure",e);
             throw new RuntimeException(e);
         }
@@ -128,13 +126,11 @@ public final class ClassUtil {
                 String jarEntryName = jarEntry.getName();
                 if(jarEntryName.endsWith(".class")){
                     String className = jarEntryName.substring(0,jarEntryName.lastIndexOf(".")).replaceAll("/",".");
-                    System.out.println("jarEntryName: " + jarEntryName + "   className:" + className);
                     doAddClass(classSet,className);
                 }
             }
 
         }catch (Exception e){
-            e.printStackTrace();
             LOGGER.error("get class set in libs failure",e);
             throw new RuntimeException(e);
         }

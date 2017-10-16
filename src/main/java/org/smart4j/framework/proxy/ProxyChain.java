@@ -3,6 +3,7 @@ package org.smart4j.framework.proxy;
 import net.sf.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class ProxyChain {
     private final Object [] methodParams;
 
     /** 代理列表 */
-    private List<Proxy> proxyList;
+    private List<Proxy> proxyList = new ArrayList<>();
 
     /** 代理索引 */
     private int proxyIndex = 0;

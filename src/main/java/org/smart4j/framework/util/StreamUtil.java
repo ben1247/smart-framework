@@ -29,10 +29,11 @@ public final class StreamUtil {
                 sb.append(line);
             }
         }catch (Exception e){
+            e.printStackTrace();
             LOGGER.error("get string failure" , e);
             throw new RuntimeException(e);
         }
-        return  sb.toString();
+        return sb.toString();
     }
 
 }
