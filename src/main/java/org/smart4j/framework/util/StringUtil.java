@@ -26,4 +26,8 @@ public final class StringUtil {
         return StringUtils.splitByWholeSeparator(str, separator);
     }
 
+    public static void main(String [] args){
+        String str = String.format("%05d",123456);
+        System.out.println(str);
+    }
 }
