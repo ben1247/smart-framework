@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 请求转发器
+ * 请求转发器,服务启动的时候会加载这个servlet
  * Created by yuezhang on 17/10/6.
  */
 @WebServlet(urlPatterns = "/*" , loadOnStartup = 0)

@@ -36,9 +36,12 @@ public class TransactionProxy implements Proxy {
                 result = proxyChain.doProxyChain();
                 DatabaseHelper.commitTransaction();
                 LOGGER.debug("commit transaction");
-            }catch (Exception e){
+            }catch (RuntimeException e){
                 DatabaseHelper.rollbackTransaction();
-                LOGGER.debug("rollback transaction");
+                LOGGER.debug("RuntimeException rollback transaction");
+                throw e;
+            }catch (Exception e){
+                LOGGER.debug("Exception no rollback transaction");
                 throw e;
             }finally {
                 FLAG_HOLDER.remove();
