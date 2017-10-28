@@ -31,7 +31,7 @@ public class TransactionProxy implements Proxy {
         if(!flag && method.isAnnotationPresent(Transaction.class)){
             FLAG_HOLDER.set(true);
             try {
-                DatabaseHelper.beginTranscation();
+                DatabaseHelper.beginTransaction();
                 LOGGER.debug("begin transaction");
                 result = proxyChain.doProxyChain();
                 DatabaseHelper.commitTransaction();

@@ -21,8 +21,17 @@ public class Param {
      * @param name
      * @return
      */
-    public long getLong(String name){
-        return CastUtil.castLong(paramMap.get(name));
+    public Long getLong(String name){
+        Object obj = paramMap.get(name);
+        if (obj != null){
+            return CastUtil.castLong(obj);
+        }else {
+            return null;
+        }
+    }
+
+    public String getString(String name){
+        return paramMap.get("name") != null ? paramMap.get("name").toString() : null;
     }
 
     /**
