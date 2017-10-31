@@ -8,6 +8,11 @@ import org.apache.commons.lang3.StringUtils;
  */
 public final class StringUtil {
 
+    /**
+     * 字符串分隔符
+     */
+    public static final String SEPARATOR = String.valueOf((char)29);
+
     public static boolean isEmpty(String str){
         if(str != null){
             str = str.trim();
@@ -29,5 +34,8 @@ public final class StringUtil {
     public static void main(String [] args){
         String str = String.format("%05d",123456);
         System.out.println(str);
+
+        System.out.println(SEPARATOR);
     }
+
 }
