@@ -80,9 +80,9 @@ public class DispatcherServlet extends HttpServlet{
                 result = ReflectionUtil.invokeMethod(controllerBean,actionMethod,param);
             }
 
-            if (request instanceof View){
+            if (result instanceof View){
                 handleViewResult((View)result,request,response);
-            }else if(request instanceof Data){
+            }else if(result instanceof Data){
                 handleDataResult((Data)result,response);
             }
 

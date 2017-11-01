@@ -106,11 +106,13 @@ public final class UploadHelper {
      * 上传文件
      * @param basePath
      * @param fileParam
+     * @return 返回文件路径
      */
-    public static void uploadFile(String basePath , FileParam fileParam){
+    public static String uploadFile(String basePath , FileParam fileParam){
+        String filePath = null;
         try {
             if (fileParam != null){
-                String filePath = basePath + fileParam.getFieldName();
+                filePath = basePath + "/" + fileParam.getFileName();
                 FileUtil.createFile(filePath);
                 InputStream inputStream = new BufferedInputStream(fileParam.getInputStream());
                 OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(filePath));
@@ -120,23 +122,31 @@ public final class UploadHelper {
             LOGGER.error("upload file failure",e);
             throw new RuntimeException(e);
         }
+        return filePath;
     }
 
     /**
      * 批量上传文件
      * @param basePath
      * @param fileParamList
+     * @return 返回文件路径
      */
-    public static void uploadFile(String basePath , List<FileParam> fileParamList){
+    public static List<String> uploadFile(String basePath , List<FileParam> fileParamList){
+        List<String> filePathList = new ArrayList<>();
         try {
             if (CollectionUtil.isNotEmpty(fileParamList)){
+                String filePath = null;
                 for(FileParam fileParam : fileParamList){
-                    uploadFile(basePath,fileParam);
+                    filePath = uploadFile(basePath,fileParam);
+                    if (StringUtil.isNotEmpty(filePath)){
+                        filePathList.add(filePath);
+                    }
                 }
             }
         }catch (Exception e){
             LOGGER.error("upload file failure", e);
             throw new RuntimeException(e);
         }
+        return filePathList;
     }
 }
