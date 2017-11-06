@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * 编码与解码操作工具类
@@ -44,6 +45,15 @@ public final class CodecUtil {
             throw new RuntimeException(e);
         }
         return target;
+    }
+
+    /**
+     * MD5 加密
+     * @param source
+     * @return
+     */
+    public static String md5(String source){
+        return DigestUtils.md2Hex(source);
     }
 
 }

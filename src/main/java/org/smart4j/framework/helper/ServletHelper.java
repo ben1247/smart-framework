@@ -40,7 +40,7 @@ public final class ServletHelper {
     /**
      * 销毁
      */
-    public static void destory(){
+    public static void destroy(){
         SERVLET_HELPER_HOLDER.remove();
     }
 

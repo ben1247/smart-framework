@@ -92,7 +92,7 @@ public class DispatcherServlet extends HttpServlet{
 
             }
         }finally {
-            ServletHelper.destory();
+            ServletHelper.destroy();
         }
 
     }
