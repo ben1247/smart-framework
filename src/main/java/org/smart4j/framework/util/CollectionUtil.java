@@ -3,8 +3,7 @@ package org.smart4j.framework.util;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 集合工具类
@@ -26,6 +25,13 @@ public final class CollectionUtil {
 
     public static boolean isNotEmpty(Map<?,?> map){
         return !isEmpty(map);
+    }
+
+    public static <T> Set<T> list2Set(List<T> list){
+        if (isEmpty(list)) return null;
+        Set<T> set = new HashSet<>(list.size());
+        set.addAll(list);
+        return set;
     }
 
 }
