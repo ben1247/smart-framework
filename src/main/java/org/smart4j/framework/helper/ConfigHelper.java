@@ -77,4 +77,19 @@ public final class ConfigHelper {
         return PropsUtil.getInt(CONFIG_PROPS,ConfigConstant.APP_UPLOAD_LIMIT,5);
     }
 
+    /**
+     * 通用功能
+     * @return
+     */
+    public static String getString(String config){
+        return PropsUtil.getString(CONFIG_PROPS,config);
+    }
+
+    /**
+     * 通用功能
+     * @return
+     */
+    public static boolean getBoolean(String config){
+        return PropsUtil.getBoolean(CONFIG_PROPS,config);
+    }
 }

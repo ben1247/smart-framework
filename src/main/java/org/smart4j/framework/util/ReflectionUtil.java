@@ -29,6 +29,17 @@ public final class ReflectionUtil {
         }
         return instance;
     }
+    public static Object newInstance(String className){
+        Class<?> cls = null;
+        try {
+            cls = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            LOGGER.error("class not found",e);
+            throw new RuntimeException(e);
+        }
+        return newInstance(cls);
+
+    }
 
     /**
      * 调用方法
